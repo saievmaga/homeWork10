@@ -2,6 +2,7 @@ package ru.geekbrains.homeWork10.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.homeWork10.entities.Product;
 import ru.geekbrains.homeWork10.services.ProductsService;
@@ -35,6 +36,7 @@ public class ProductsRestController {
         return productsService.addNewProduct(product);
     }
 
+    @Secured({"ROLE_ADMIN"})
     @RequestMapping(value = "/products/delete/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteProductById(@PathVariable("id") Long id) {
         productsService.deleteProductById(id);
